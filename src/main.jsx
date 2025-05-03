@@ -10,13 +10,14 @@ import Root from './layouts/Root.jsx';
 import Home from './componets/Home/Home.jsx';
 import Login from './componets/Login/Login.jsx';
 import Register from './componets/Register/Register.jsx';
+import AuthProvider from './contexts/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
     children: [
-      {index: true, Component: Home},
+      { index: true, Component: Home },
       {
         path: "login",
         Component: Login
@@ -31,6 +32,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
