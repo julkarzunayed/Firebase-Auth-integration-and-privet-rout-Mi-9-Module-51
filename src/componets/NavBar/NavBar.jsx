@@ -53,10 +53,11 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 {
-                    user ? <>
-                    <span className='px-4 py-2 border-2 border-gray-200 bg-base-200 mr-2 text-xs rounded-2xl' >{user.email}</span>
-                    <a onClick={handleSignOut} className="btn">Sign Out</a>
-                    </> : <Link className='btn' to="/login">LogIn</Link>
+                    user && <span className='px-4 py-2 border-2 border-gray-200 bg-base-200 mr-2 text-sm rounded-2xl flex items-center gap-2' >{user.displayName? user.displayName : user.email} {user.photoURL  && <img className='h-6 rounded-full' src={user.photoURL} alt="" />}</span>
+                }
+                {
+                    user ? <a onClick={handleSignOut} className="btn">Sign Out</a>
+                     : <Link className='btn' to="/login">LogIn</Link>
                 }
             </div>
         </div>

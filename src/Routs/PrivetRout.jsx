@@ -6,15 +6,15 @@ const PrivetRout = ({ children }) => {
 
     const { user, loading } = useContext(AuthContext);
 
-    const location = useLocation();
-    console.log(location);
+    // const location = useLocation();
+    // console.log(location);
 
     if(loading){
         return <div className="text-center mt-20"><span className="loading loading-bars loading-xl"></span></div>;
     }
 
     if(!user){
-        return <Navigate to="/login"></Navigate>;
+        return <Navigate state={location?.pathname} to="/login"></Navigate>;
     }
 
     return children ;
