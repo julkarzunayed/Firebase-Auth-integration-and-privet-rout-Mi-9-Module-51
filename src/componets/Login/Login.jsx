@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const Login = () => {
 
     const { SingInUser } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const handleLogin = e => {
         e.preventDefault()
@@ -18,6 +19,10 @@ const Login = () => {
         SingInUser(email, password)
             .then(result => {
                 console.log(result);
+                navigate("/");
+
+                //It does not work here
+                // <Navigate to="/"></Navigate>
             })
             .catch(error => {
                 console.log(error.message);

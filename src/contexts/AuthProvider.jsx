@@ -10,14 +10,17 @@ import { auth } from '../firebase.init';
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     //Create a Firebase User
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     //Sign in a user to site 
     const SingInUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword (auth, email, password);
     }
 
@@ -35,6 +38,7 @@ const AuthProvider = ({children}) => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             console.log("inside the useEffect: ", currentUser);
             setUser(currentUser);
+            setLoading(false)
         })
         return () => {
             unSubscribe();
@@ -44,11 +48,13 @@ const AuthProvider = ({children}) => {
 
     //Sign Out a user By FireBase
     const signOutUser = () => {
+        setLoading(true)
         return signOut(auth);
     }
 
     const userInfo = {
         user,
+        loading,
         createUser,
         SingInUser,
         signOutUser
